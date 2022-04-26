@@ -1,0 +1,27 @@
+#/bin/bash
+
+power_off=''
+reboot=''
+lock=''
+
+chosen=$(printf '%s;%s;%s\n' "$power_off" "$reboot" "$lock" \
+    | rofi -theme 'themes/power.rasi' \
+           -dmenu \
+           -sep ';' \
+           -selected-row 0)
+
+case "$chosen" in
+    "$power_off")
+        poweroff
+        ;;
+
+    "$reboot")
+        reboot
+        ;;
+
+    "$lock")
+        i3-msg exit
+        ;;
+
+    *) exit 1 ;;
+esac

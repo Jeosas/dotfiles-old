@@ -1,0 +1,51 @@
+* {
+  /* Colors */
+  accent:           #6a9955;
+  background:       #1e1e1e;
+  background-light: #242424;
+  background-focus: #2e2e2e;
+  foreground:       #e5e5e5;
+  foreground-list:  #c6c6c6;
+  on:               #6a9955;
+  off:              #cd3131;
+}
+
+* {
+  /* Fonts */
+  text-font:        "Hack Bold 14";
+  text-font-mono:   "Hack 14";
+  icon-font:        "Hack 60";
+  icon-font-small:  "Hack 24";
+}
+
+* {
+  /* General */
+  all-inputbar-margin:                  4px 4px;
+  all-prompt-padding:                   16px 20px;
+  all-entry-padding:                    18px 16px 16px 0px;
+
+  /* list menus: apps, network and vpn */
+  list-element-padding:                 23px 30px;
+  list-element-margin:                  @all-inputbar-margin;
+  list-element-border:                  0px 0px 0px 8px;
+  list-8-window-padding:                219px 360px;
+
+  /* option-menus */
+  option-element-padding:               70px 70px 60px 70px;
+  option-window-padding:                20px 30px;
+  option-listview-spacing:              30px;
+
+  apps-textbox-prompt-colon-padding:    16px;
+
+  prompt-window-height:                 300px;
+  prompt-window-width:                  627px;
+  prompt-window-border:                 2px;
+  prompt-prompt-padding:                20px 30px;
+  prompt-prompt-margin:                 8px;
+  prompt-listview-padding:              60px 114px 0px 114px;
+  /* Values bellow are 'no-padding' ones for a size 18 (@prompt-text-font) font,
+   * played around using this character: ■
+   * We then add add 30 actual padding around the text.
+   *                                    -4px  -1px  -6px  -28px */
+  prompt-element-padding:               26px  29px  24px  2px;
+}

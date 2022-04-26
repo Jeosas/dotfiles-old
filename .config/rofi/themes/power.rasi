@@ -1,0 +1,11 @@
+@import "option-menu.rasi"
+
+#window {
+  padding: @option-window-padding;
+  width: 775px;
+}
+
+#listview {
+  spacing: @option-listview-spacing;
+  lines: 3;
+}

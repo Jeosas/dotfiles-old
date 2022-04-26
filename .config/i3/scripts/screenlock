@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# pause notifications
+if [[ "$DUNST_INSTALLED" == "true" && "$DUNST_IS_PAUSED" == "false" ]]; then
+    dunstctl set-paused true
+fi
+
+# lock screen
+i3lock \
+    --screen 0 \
+    -c 1a1a1aff \
+    --blur 8 \
+    \
+    --indicator \
+    --inside-color 00000000 \
+    --ring-color ffffffc0 \
+    --line-color 00000000 \
+    \
+    --insidever-color 00000000 \
+    --ringver-color dc602eff \
+    \
+    --insidewrong-color 00000000 \
+    --ringwrong-color bc412bff \
+    \
+    --keyhl-color 6ab547ff \
+    --bshl-color bc412bff \
+    --separator-color 00000000 \
+    \
+    --force-clock \
+    --time-str "%H:%M" \
+    --time-font "Hack" \
+    --time-size 32 \
+    --time-color ffffffc0 \
+    --date-str "" \
+    \
+    --verif-text "" \
+    --wrong-text "" \
+    --noinput-text "" \
+    --modif-color ffffffc0 \
+    --modif-size 16 \
+
+
+# unpause notifications
+dunstctl set-paused false

@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-scale '/home/jeosas/images/wallpapers/mountain_1.jpg' 

@@ -1,0 +1,36 @@
+@import "_variables.rasi"
+
+* {
+  background-color: @background;
+  text-color: @foreground;
+  font: @icon-font;
+}
+
+#window {
+  children: [ horibox ];
+  border: 2px;
+  border-color: @accent;
+}
+
+#horibox {
+  children: [ listview ];
+}
+
+#listview {
+  layout: horizontal;
+}
+
+#element {
+  padding: @option-element-padding;
+  background-color: @background-light;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+#element.selected {
+  background-color: @accent;
+  text-color: @background;
+}
