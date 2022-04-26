@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 power_off=''
 reboot=''

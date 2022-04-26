@@ -1,0 +1,86 @@
+#̣!/bin/bash
+
+## functions
+
+command_exists (){
+    command -v $1 &> /dev/null
+}
+
+# yadm class assign
+
+yamd config --unset-all local.class
+
+if [[ $(cat /sys/class/dmi/id/chassis_type) == 3 ]]; then
+   yadm config --add local.class desktop
+else
+   yadm config --add local.class laptop
+fi
+
+if [[ $(lsmod | grep bt | wc -l) > 0 ]]; then
+   yadm config --add local.class bluetooth
+fi
+
+
+# install paru
+if ! command_exists paru; then
+   if ! command_exists rustup; then
+      sudo pacman -S --needed rustup
+      rustup default stable
+   fi
+
+   sudo pacman -S --needed base-devel
+   git clone https://aur.archlinux.org/paru.git
+   cd paru
+   makepkg -si
+fi
+
+# base soft install
+
+paru -S --needed \
+  xorg \
+  i3-gaps \
+  i3lock-color \
+  mons \
+  \
+  polybar \
+  dunst \
+  rofi \
+  thefuck \
+  pacman-contrib \
+  papirus-icon-theme \
+  ttf-hack \
+  ttf-font-awesome \
+  ttf-liberation \
+  \
+  alacritty \
+  firefox \
+  vim \
+  bat \
+  btop \
+  pokemon-colorscripts-git \
+  ranger
+
+pip install autotiling
+
+if [[ -n $(yadm config --get local.class laptop) ]]; then
+   paru -S  --needed acpi light
+fi
+
+if [[ -n $(yadm config --get local.class bluetooth) ]]; then
+   paru -S --needed bluez bluez-utils blueman
+   sudo systemctl enable bluetooth
+   sudo systemctl start bluetooth
+fi
+
+# zsh install
+if ! command_exists zsh; then
+   paru -S --needed zsh
+   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+fi
+
+# doomemacs install
+if ! command_exists emacs; then
+   paru -S --needed emacs ripgrep fd
+   git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+   ~/.emacs.d/bin/doom install
+fi

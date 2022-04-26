@@ -1,2 +1,41 @@
-# Cursor
-Xcursor.theme: LyraX-cursors
+Xcursor.theme: Neonly
+
+#define FOREGROUND #e4e4e4
+#define BACKGROUND #1e1e1e
+
+#define COLOR0  #1c1c1c
+#define COLOR8  #000000
+#define COLOR1  #f14c4c
+#define COLOR9  #cd3131
+#define COLOR2  #b5cea8
+#define COLOR10 #579c4c
+#define COLOR3  #dcdcaa
+#define COLOR11 #cd9178
+#define COLOR4  #569cd6
+#define COLOR12 #2472c8
+#define COLOR5  #daadd6
+#define COLOR13 #c586c0
+#define COLOR6  #9cdcfe
+#define COLOR14 #11a8cd
+#define COLOR7  #d4d4d4
+#define COLOR15 #AEAFAD
+
+*.foreground:  FOREGROUND
+*.background:  BACKGROUND
+*.cursorColor: FOREGROUND
+*.color0:      COLOR0
+*.color8:      COLOR8
+*.color1:      COLOR1
+*.color9:      COLOR9
+*.color2:      COLOR2
+*.color10:     COLOR10
+*.color3:      COLOR3
+*.color11:     COLOR11
+*.color4:      COLOR4
+*.color12:     COLOR12
+*.color5:      COLOR5
+*.color13:     COLOR13
+*.color6:      COLOR6
+*.color14:     COLOR14
+*.color7:      COLOR7
+*.color15:     COLOR15

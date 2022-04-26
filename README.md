@@ -14,6 +14,7 @@ You're good to go !
 ## Features
 - vscode's dark plus theme across the whole setup
 - i3-gaps setup
+- [autotiling](https://github.com/nwg-piotr/autotiling)
 - i3lock
 - polybar
 - rofi menus: apps and power menu
@@ -56,14 +57,6 @@ You're good to go !
 | (resize mode) `[hjkl]` 	| resize focused window (vimlike)						|
 
 
-#### Tiling manipulation (_soon to be replaced by an auto tiler script_)
-
-|  Shortcut  	|  Action  												|
-|:------------|:--------------------------------|
-| `Super + s` | split in horizontal orientation |
-| `Super + v` | split in vertical orientation 	|
-
-
 ### Apps
 
 |  Shortcut  								|  Action 					|
@@ -80,3 +73,16 @@ You're good to go !
 | `Super + Shift + c` | reload i3 config				|
 | `Super + Shift + r` | restart i3 							|
 | `Super + Shift + e` | exit i3 (force logout) 	|
+
+
+## Install notes
+
+### Can't control brightness
+
+Add udev rule:
+
+_/etc/udev/rules.d/backlight.rules_
+```
+RUN+="/bin/chgrp video /sys/class/backlight/intel_backlight/brightness"
+RUN+="/bin/chmod g+w /sys/class/backlight/intel_backlight/brightness"
+```

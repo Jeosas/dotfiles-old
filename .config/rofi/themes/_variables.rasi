@@ -14,8 +14,8 @@
   /* Fonts */
   text-font:        "Hack Bold 14";
   text-font-mono:   "Hack 14";
-  icon-font:        "Hack 60";
-  icon-font-small:  "Hack 24";
+  icon-font:        "Font Awesome 6 Free 60";
+  icon-font-small:  "Font Awesome 6 Free 24";
 }
 
 * {
@@ -31,9 +31,9 @@
   list-8-window-padding:                219px 360px;
 
   /* option-menus */
-  option-element-padding:               70px 70px 60px 70px;
+  option-element-padding:               70px;
   option-window-padding:                20px 30px;
-  option-listview-spacing:              30px;
+  option-listview-spacing:              20px;
 
   apps-textbox-prompt-colon-padding:    16px;
 

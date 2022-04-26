@@ -10,13 +10,5 @@ else
 	pload=$(echo " CPU ${load}%")
 fi
 
+echo $pload
 
-load=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader | awk '{ print $1 }')
-
-if [[ 1 -eq "$(echo "$load > 90" | bc)" ]]; then
-	echo %{F#BC412B}%{u#BC412B}"$pload  GPU ${load}%"%{F- u-}
-elif [[ 1 -eq "$(echo "$load > 70" | bc)" ]]; then
-	echo %{F#DC602E}%{u#DC602E}"$pload  GPU ${load}%"%{F- u-}
-else
-	echo "$pload  GPU ${load}%"
-fi

@@ -1,0 +1,344 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;==========================================================
+
+[colors]
+background = ${xrdb:background}
+primary = ${xrdb:color10}
+warning = ${xrdb:color1}
+danger = ${xrdb:color9}
+
+[vars]
+padding-inner = 2
+padding-outer = 2
+
+
+[bar/main]
+wm-restack = i3
+enable-ipc = true
+
+width = 100%
+height = 22
+
+background = ${colors.background}
+foreground = ${colors.primary}
+
+line-size = 2
+line-color = ${colors.primary}
+
+border-size = 0
+modules-margin = 0
+
+font-0 = Hack:style=Regular:size=8;3
+font-1 = Font Awesome 6 Free:style=Solid:size=8;3
+font-2 = Font Awesome 6 Free:style=Regular:size=8;3
+font-3 = Font Awesome 6 Brands:style=Regular:size=8;3
+
+tray-position = right
+modules-left = power i3
+modules-center = music
+modules-right = temp load memory drives updates bluetooth network_wlan network_eth audio battery date
+
+[bar/secondary]
+wm-restack = i3
+enable-ipc = true
+monitor = ${env:MONITOR:}
+monito-strict = true
+
+width = 100%
+height = 22
+
+background = ${colors.background}
+foreground = ${colors.primary}
+
+line-size = 2
+line-color = ${colors.primary}
+
+border-size = 0
+modules-margin = 0
+
+font-0 = Hack:style=Regular:size=8;3
+font-1 = Font Awesome 6 Free:style=Solid:size=8;3
+font-2 = Font Awesome 6 Free:style=Regular:size=8;3
+font-3 = Font Awesome 6 Brands:style=Regular:size=8;3
+
+modules-left = power i3
+modules-right = date
+
+
+;========
+; modules
+;========
+
+
+; power button
+;--------------
+
+[module/power]
+type = custom/text
+content = 
+content-padding = 2
+click-left = ~/.config/rofi/menus/power
+
+
+; i3 workspaces
+;---------------
+
+[module/i3]
+type = internal/i3
+
+; Only show workspaces defined on the same output as the bar
+pin-workspaces = true
+
+; This will split the workspace name on ':'
+strip-wsnumbers = true
+
+; Sort the workspaces by index instead of the default
+index-sort = true
+
+; Wrap around when reaching the first/last workspace
+wrapping-scroll = false
+
+; Set the scroll cycle direction 
+; Default: true
+reverse-scroll = false
+
+
+label-focused = %name%
+label-focused-underline = ${colors.primary}
+label-focused-padding = 1
+
+label-unfocused = %name%
+label-unfocused-padding = 1
+
+label-visible = %name%
+label-visible-underline = ${colors.primary}
+label-visible-padding = 1
+
+label-urgent = %name%
+label-urgent-foreground = ${colors.warning}
+label-urgent-underline = ${colors.warning}
+label-padding-left = ${vars.padding-inner}
+label-padding-right = ${vars.padding-outer}
+
+label-mode-foreground = ${colors.danger}
+
+; music
+;------
+
+[module/music]
+type = custom/script
+tail = true
+; prefix symbol is shown before the text
+format-prefix = " "
+format = <label>
+
+exec = ~/.config/polybar/scripts/scroll_music_status.sh
+
+click-left = playerctl --player=%any play-pause
+
+
+; date/time
+;-----------
+
+[module/date]
+type = internal/date
+date = %e %b %Y
+time = %H:%M
+
+label = %date%  %time%
+label-padding-left = ${vars.padding-inner}
+label-padding-right = ${vars.padding-outer}
+
+{% if yadm.class == "laptop" %}
+; battery
+;---------
+
+[module/battery]
+type = internal/battery
+low-at = 10
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+format-charging =  <label-charging>
+format-charging-padding = ${vars.padding-inner}
+label-charging = %percentage%%
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-padding = ${vars.padding-inner}
+label-discharging = %percentage%%
+
+format-full =  <label-full>
+format-full-padding = ${vars.padding-inner}
+label-full = %percentage%%
+
+format-low = <ramp-capacity> <label-low>
+format-low-underline = ${colors.danger}
+format-low-padding = ${vars.padding-inner}
+label-low = %percentage%%
+{% endif %}
+
+; volume
+;--------
+
+[module/audio]
+type = internal/pulseaudio
+
+sink = 
+
+use-ui-max = false
+
+interval = 5
+
+format-volume = <ramp-volume> <label-volume>
+format-volume-padding = ${vars.padding-inner}
+
+format-muted = <label-muted>
+format-muted-padding = ${vars.padding-inner}
+format-muted-underline = ${colors.warning}
+label-muted =  muted
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+click-right = alacritty -e ncpamixer
+
+
+; network
+;---------
+
+[module/network_eth]
+type = internal/network
+
+interface = enp3s0
+
+interval = 3
+
+format-connected = <label-connected>
+format-connected-background = ${colors.background}
+format-connected-padding = ${vars.padding-inner}
+label-connected =  %upspeed%  %downspeed% 
+
+
+[module/network_wlan]
+type = internal/network
+
+interface = wlan0
+
+interval = 3
+
+format-connected = <label-connected>
+format-connected-background = ${colors.background}
+format-connected-padding = ${vars.padding-inner}
+label-connected =  %upspeed%  %downspeed% 
+
+{% if yadm.class == "bluetooth" %}
+; bluetooth
+;----------
+
+[module/bluetooth]
+type = custom/script
+
+exec = ~/.config/polybar/scripts/bluetooth.sh
+interval = 2
+
+click-left = exec blueman-manager
+click-right = exec ~/.config/polybar/scripts/toggle_bluetooth.sh
+
+format = <label>
+format-padding = ${vars.padding-inner}
+label = %output%
+{% endif %}
+
+; updates
+;--------
+
+[module/updates]
+type = custom/script
+
+exec = checkupdates | wc -l
+interval = 1800
+
+format =  <label>
+format-padding = ${vars.padding-inner}
+label = %output%
+
+; drives
+;--------
+
+[module/drives]
+type = internal/fs
+
+mount-0 = /
+
+interval = 60
+fixed-values = true
+spacing = 0
+
+format-mounted =  <label-mounted>
+format-mounted-background = ${colors.background}
+format-mounted-padding = ${vars.padding-inner}
+label-mounted = %percentage_used%%
+
+format-unmounted = 
+
+
+; memory
+;--------
+
+[module/memory]
+type = internal/memory
+
+interval = 6
+
+format =  <label>
+format-background = ${colors.background}
+format-padding = ${vars.padding-inner}
+label = %percentage_used%%
+
+
+; load
+;------
+
+[module/load]
+type = custom/script
+
+exec = ~/.config/polybar/scripts/load.sh
+interval = 6
+
+format = <label>
+format-padding = ${vars.padding-inner}
+label = %output%
+
+
+; temps
+;-------
+
+[module/temp]
+type = custom/script
+
+exec = ~/.config/polybar/scripts/temp.sh
+interval = 6
+
+format = <label>
+format-padding = ${vars.padding-inner}
+label = %output%
+
+
+[global/wm]
+margin-bottom = 0
+margin-top = 0
