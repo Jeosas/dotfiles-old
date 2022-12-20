@@ -38,15 +38,12 @@ line-color = ${colors.primary}
 border-size = 0
 modules-margin = 0
 
-font-0 = Hack:style=Regular:size=8;3
-font-1 = Font Awesome 6 Free:style=Solid:size=8;3
-font-2 = Font Awesome 6 Free:style=Regular:size=8;3
-font-3 = Font Awesome 6 Brands:style=Regular:size=8;3
+font-0 = Hack Nerd Font:style=Regular:size=9;3
 
 tray-position = right
-modules-left = power i3
+modules-left = power i3 spacer load memory temp
 modules-center = music
-modules-right = temp load memory drives updates bluetooth network_wlan network_eth audio battery date
+modules-right = drives updates bluetooth network_wlan network_eth audio battery date
 
 [bar/secondary]
 wm-restack = i3
@@ -66,10 +63,7 @@ line-color = ${colors.primary}
 border-size = 0
 modules-margin = 0
 
-font-0 = Hack:style=Regular:size=8;3
-font-1 = Font Awesome 6 Free:style=Solid:size=8;3
-font-2 = Font Awesome 6 Free:style=Regular:size=8;3
-font-3 = Font Awesome 6 Brands:style=Regular:size=8;3
+font-0 = Hack Nerd Font:style=Regular:size=8;3
 
 modules-left = power i3
 modules-right = date
@@ -78,6 +72,15 @@ modules-right = date
 ;========
 ; modules
 ;========
+
+
+; spacer
+;--------
+
+[module/spacer]
+type = custom/text
+content = " "
+content-padding = 0
 
 
 ; power button
@@ -114,32 +117,33 @@ reverse-scroll = false
 
 
 label-focused = %name%
-label-focused-underline = ${colors.primary}
+label-focused-overline = ${colors.primary}
 label-focused-padding = 1
 
 label-unfocused = %name%
 label-unfocused-padding = 1
 
 label-visible = %name%
-label-visible-underline = ${colors.primary}
+label-visible-overline = ${colors.primary}
 label-visible-padding = 1
 
 label-urgent = %name%
 label-urgent-foreground = ${colors.warning}
-label-urgent-underline = ${colors.warning}
+label-urgent-overline = ${colors.warning}
+label-urgent-padding = 1
 label-padding-left = ${vars.padding-inner}
 label-padding-right = ${vars.padding-outer}
 
 label-mode-foreground = ${colors.danger}
 
 ; music
-;------
+;-------
 
 [module/music]
 type = custom/script
 tail = true
 ; prefix symbol is shown before the text
-format-prefix = " "
+format-prefix = " "
 format = <label>
 
 exec = ~/.config/polybar/scripts/scroll_music_status.sh
@@ -166,13 +170,25 @@ label-padding-right = ${vars.padding-outer}
 type = internal/battery
 low-at = 10
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-5 = 
+ramp-capacity-6 = 
+ramp-capacity-7 = 
+ramp-capacity-8 = 
+ramp-capacity-9 = 
 
-format-charging =  <label-charging>
+ramp-charging-0 = 
+ramp-charging-1 = 
+ramp-charging-2 = 
+ramp-charging-3 = 
+ramp-charging-4 = 
+ramp-charging-5 = 
+
+format-charging = <ramp-charging> <label-charging>
 format-charging-padding = ${vars.padding-inner}
 label-charging = %percentage%%
 
@@ -180,12 +196,12 @@ format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-padding = ${vars.padding-inner}
 label-discharging = %percentage%%
 
-format-full =  <label-full>
+format-full = ﮣ <label-full>
 format-full-padding = ${vars.padding-inner}
 label-full = %percentage%%
 
 format-low = <ramp-capacity> <label-low>
-format-low-underline = ${colors.danger}
+format-low-overline = ${colors.danger}
 format-low-padding = ${vars.padding-inner}
 label-low = %percentage%%
 
@@ -206,12 +222,12 @@ format-volume-padding = ${vars.padding-inner}
 
 format-muted = <label-muted>
 format-muted-padding = ${vars.padding-inner}
-format-muted-underline = ${colors.warning}
-label-muted =  muted
+format-muted-overline = ${colors.warning}
+label-muted = ﱝ muted
 
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
+ramp-volume-0 = 奄
+ramp-volume-1 = 奔
+ramp-volume-2 = 墳
 
 click-right = alacritty -e ncpamixer
 
@@ -229,7 +245,7 @@ interval = 3
 format-connected = <label-connected>
 format-connected-background = ${colors.background}
 format-connected-padding = ${vars.padding-inner}
-label-connected =  %upspeed%  %downspeed% 
+label-connected =  %upspeed%  %downspeed% 
 
 
 [module/network_wlan]
@@ -242,7 +258,8 @@ interval = 3
 format-connected = <label-connected>
 format-connected-background = ${colors.background}
 format-connected-padding = ${vars.padding-inner}
-label-connected =  %upspeed%  %downspeed% 
+label-connected =  %upspeed%   %downspeed% 
+
 
 ; bluetooth
 ;----------
@@ -253,7 +270,7 @@ type = custom/script
 exec = ~/.config/polybar/scripts/bluetooth.sh
 interval = 2
 
-click-left = exec blueman-manager
+click-left = exec alacritty -e bluetuith
 click-right = exec ~/.config/polybar/scripts/toggle_bluetooth.sh
 
 format = <label>
@@ -269,7 +286,7 @@ type = custom/script
 exec = checkupdates | wc -l
 interval = 1800
 
-format =  <label>
+format =  <label>
 format-padding = ${vars.padding-inner}
 label = %output%
 
@@ -285,7 +302,7 @@ interval = 60
 fixed-values = true
 spacing = 0
 
-format-mounted =  <label-mounted>
+format-mounted =  <label-mounted>
 format-mounted-background = ${colors.background}
 format-mounted-padding = ${vars.padding-inner}
 label-mounted = %percentage_used%%
@@ -301,7 +318,7 @@ type = internal/memory
 
 interval = 6
 
-format =  <label>
+format =  <label>
 format-background = ${colors.background}
 format-padding = ${vars.padding-inner}
 label = %percentage_used%%

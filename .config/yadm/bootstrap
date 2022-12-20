@@ -1,5 +1,7 @@
 #̣!/bin/bash
 
+cd ~
+
 ## functions
 
 command_exists (){
@@ -40,8 +42,10 @@ paru -S --needed \
   xorg \
   i3-gaps \
   i3lock-color \
-  mons \
   \
+  playerctl \
+  zscroll-git \
+  ncpamixer \
   polybar \
   dunst \
   rofi \
@@ -49,8 +53,11 @@ paru -S --needed \
   pacman-contrib \
   papirus-icon-theme \
   ttf-hack \
+  nerd-fonts-hack \
   ttf-font-awesome \
   ttf-liberation \
+  ttf-twemoji \
+  flameshot \
   \
   alacritty \
   firefox \
@@ -64,10 +71,17 @@ pip install autotiling
 
 if [[ -n $(yadm config --get local.class laptop) ]]; then
    paru -S  --needed acpi light
+
+   git clone --recursive https://github.com/Ventto/mons.git && \
+       cd mons && \
+       sudo make install && \
+       cd .. && \
+       rm -rf mons
+   cd ~
 fi
 
 if [[ -n $(yadm config --get local.class bluetooth) ]]; then
-   paru -S --needed bluez bluez-utils blueman
+   paru -S --needed bluez bluez-utils bluetuith
    sudo systemctl enable bluetooth
    sudo systemctl start bluetooth
 fi
@@ -83,4 +97,7 @@ if ! command_exists emacs; then
    paru -S --needed emacs ripgrep fd
    git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
    ~/.emacs.d/bin/doom install
+
+   paru -S --needed python-pip python-pipx pyenv
+   pipx install "python-lsp-server[all]"
 fi

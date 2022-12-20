@@ -1,19 +1,19 @@
 * {
   /* Colors */
-  accent:           #6a9955;
-  background:       #1e1e1e;
-  background-light: #242424;
-  background-focus: #2e2e2e;
-  foreground:       #e5e5e5;
-  foreground-list:  #c6c6c6;
+  accent:           #A3BE8C;
+  background:       #2E3440;
+  background-light: #3B4252;
+  background-focus: #4C566A;
+  foreground:       #ECEFF4;
+  foreground-list:  #D8DEE9;
   on:               #6a9955;
   off:              #cd3131;
 }
 
 * {
   /* Fonts */
-  text-font:        "Hack Bold 14";
-  text-font-mono:   "Hack 14";
+  text-font:        "Hack Nerd Font Bold 14";
+  text-font-mono:   "Hack Nerd Font 14";
   icon-font:        "Font Awesome 6 Free 60";
   icon-font-small:  "Font Awesome 6 Free 24";
 }

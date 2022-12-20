@@ -1,9 +1,14 @@
 #!/bin/bash
 
+get_xrdb_color() { # (color_name, alpha)
+  hex_color=$(xrdb -query | grep "*.$1" | cut -f 2)
+  echo "${hex_color:1}$2"
+}
+
+get_xrdb_color "color9" "ff"
+
 # pause notifications
-if [[ "$DUNST_INSTALLED" == "true" && "$DUNST_IS_PAUSED" == "false" ]]; then
-    dunstctl set-paused true
-fi
+dunstctl set-paused true
 
 # lock screen
 i3lock \
@@ -13,32 +18,33 @@ i3lock \
     \
     --indicator \
     --inside-color 00000000 \
-    --ring-color ffffffc0 \
+    --ring-color $(get_xrdb_color "color7" "ff") \
     --line-color 00000000 \
     \
     --insidever-color 00000000 \
-    --ringver-color dc602eff \
+    --ringver-color $(get_xrdb_color "color4" "ff") \
     \
     --insidewrong-color 00000000 \
-    --ringwrong-color bc412bff \
+    --ringwrong-color $(get_xrdb_color "color1" "ff") \
     \
-    --keyhl-color 6ab547ff \
-    --bshl-color bc412bff \
+    --keyhl-color $(get_xrdb_color "color2" "ff") \
+    --bshl-color $(get_xrdb_color "color3" "ff") \
     --separator-color 00000000 \
     \
     --force-clock \
     --time-str "%H:%M" \
     --time-font "Hack" \
     --time-size 32 \
-    --time-color ffffffc0 \
+    --time-color $(get_xrdb_color "color7" "ff") \
     --date-str "" \
     \
     --verif-text "" \
     --wrong-text "" \
     --noinput-text "" \
-    --modif-color ffffffc0 \
+    --modif-color $(get_xrdb_color "color9" "ff") \
     --modif-size 16 \
-
+    --nofork
 
 # unpause notifications
 dunstctl set-paused false
+

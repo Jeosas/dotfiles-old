@@ -18,8 +18,8 @@ function afmagic_dashes {
 }
 
 # primary prompt: dashed separator, directory and vcs info
-PS1="${FG[242]}\${(l.\$(afmagic_dashes)..-.)}%{$reset_color%}
-${FG[071]}%~\$(git_prompt_info)\$(hg_prompt_info) ${FG[165]}%(!.#.»)%{$reset_color%} "
+PS1="${FG[008]}\${(l.\$(afmagic_dashes)..-.)}%{$reset_color%}
+${FG[010]}%~\$(git_prompt_info)\$(hg_prompt_info) ${FG[005]}%(!.#.»)%{$reset_color%} "
 PS2="${FG[009]}\ %{$reset_color%}"
 
 # right prompt: return code, virtualenv and context (user@host)
@@ -27,20 +27,20 @@ RPS1="%(?..${FG[009]}%? ↵%{$reset_color%})"
 if (( $+functions[virtualenv_prompt_info] )); then
   RPS1+='$(virtualenv_prompt_info)'
 fi
-RPS1+=" ${FG[242]}%n@%m%{$reset_color%}"
+RPS1+=" ${FG[008]}%n@%m%{$reset_color%}"
 
 # git settings
-ZSH_THEME_GIT_PROMPT_PREFIX=" ${FG[075]}(${FG[078]}"
+ZSH_THEME_GIT_PROMPT_PREFIX=" ${FG[004]}(${FG[006]}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_DIRTY="${FG[214]}*%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="${FG[075]})%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="${FG[011]}*%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="${FG[004]})%{$reset_color%}"
 
 # hg settings
-ZSH_THEME_HG_PROMPT_PREFIX=" ${FG[075]}(${FG[078]}"
+ZSH_THEME_HG_PROMPT_PREFIX=" ${FG[004]}(${FG[006]}"
 ZSH_THEME_HG_PROMPT_CLEAN=""
-ZSH_THEME_HG_PROMPT_DIRTY="${FG[214]}*%{$reset_color%}"
-ZSH_THEME_HG_PROMPT_SUFFIX="${FG[075]})%{$reset_color%}"
+ZSH_THEME_HG_PROMPT_DIRTY="${FG[011]}*%{$reset_color%}"
+ZSH_THEME_HG_PROMPT_SUFFIX="${FG[004]})%{$reset_color%}"
 
 # virtualenv settings
-ZSH_THEME_VIRTUALENV_PREFIX=" ${FG[075]}["
+ZSH_THEME_VIRTUALENV_PREFIX=" ${FG[008]}["
 ZSH_THEME_VIRTUALENV_SUFFIX="]%{$reset_color%}"

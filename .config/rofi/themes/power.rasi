@@ -2,7 +2,7 @@
 
 #window {
   padding: @option-window-padding;
-  width: 765px;
+  width: 775px;
 }
 
 #listview {
