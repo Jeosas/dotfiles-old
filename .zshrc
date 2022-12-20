@@ -14,8 +14,7 @@ ZSH_THEME="af-magic"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# If set to an empty array, this variable will have no effect. ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -71,7 +70,10 @@ ZSH_THEME="af-magic"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git vi-mode)
+
+# bar cursor on insert mode
+export VI_MODE_SET_CURSOR=true
 
 source $ZSH/oh-my-zsh.sh
 
@@ -82,7 +84,15 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-export EDITOR='vim'
+export EDITOR='nvim'
+
+# doom emacs
+export PATH="$HOME/.emacs.d/bin:$PATH"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -98,7 +108,24 @@ export EDITOR='vim'
 
 eval $(thefuck --alias)
 
+alias nv='nvim'
+
+alias ranger='ranger --choosedir=/tmp/.rangerdir && cd "$(cat /tmp/.rangerdir)"'
+alias lz='lazygit'
+
+# git-worktree
+alias gwa='gfa && git worktree add'
+alias gwl='git worktree list'
+alias gwm='git worktree move'
+alias gwr='git worktree remove'
+
+alias git-clean-all="git fetch --all --prune && git branch | grep -v '^[\\*\\+]' | xargs git branch -D"
+
+alias docker_clean='docker container prune -f && docker image prune -f && docker builder prune'
+
 alias yeet="paru -Rsn"
+
+ylocal (){sauron dev up --build -v /data:/data -v $PWD/libs:/skynet/libs libs/yavin4}
 
 csv (){
     column -s, -t < $1 | less -#2 -N -S
@@ -109,9 +136,10 @@ mount_usb (){
 }
 
 # typer autocomplition
-zstyle ':conpletion:*' menu select
+zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 
 # Zaloeil
 pokemon-colorscripts -r
+
