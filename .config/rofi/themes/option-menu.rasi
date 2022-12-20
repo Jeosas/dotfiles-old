@@ -1,4 +1,18 @@
 @import "_variables.rasi"
+configuration {
+  /* vim keybindings */
+  kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
+  kb-row-down: "Down,Control+j";
+  kb-row-left: "Control+h";
+  kb-row-right: "Control+l";
+  kb-accept-entry: "Control+space,Return,KP_Enter";
+  kb-remove-to-eol: "Control+Shift+e";
+  kb-mode-next: "Shift+Right,Control+Tab";
+  kb-mode-previous: "Shift+Left,Control+Shift+Tab";
+  kb-remove-char-back: "BackSpace";
+  kb-mode-complete: ""; 
+  kb-row-select: "";
+}
 
 * {
   background-color: @background;
