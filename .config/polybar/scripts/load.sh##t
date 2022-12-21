@@ -1,6 +1,6 @@
 #!/bin/bash
 
-{% if yadm.class == gpu-nvidia %}
+{% if yadm.class == "gpu-nvidia" %}
 label=" CPU"
 {% else %}
 label=""
@@ -16,7 +16,7 @@ else
 	pload=$(echo "${label} ${load}%")
 fi
 
-{% if yadm.class == gpu-nvidia %}
+{% if yadm.class == "gpu-nvidia" %}
 load=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader | awk '{ print $1 }')
 
 if [[ 1 -eq "$(echo "$load > 90" | bc)" ]]; then

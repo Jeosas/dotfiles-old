@@ -10,7 +10,7 @@ command_exists (){
 
 # yadm class assign
 
-yamd config --unset-all local.class
+yadm config --unset-all local.class
 
 if [[ $(cat /sys/class/dmi/id/chassis_type) == 3 ]]; then
    yadm config --add local.class desktop
@@ -20,6 +20,10 @@ fi
 
 if [[ $(lsmod | grep bt | wc -l) > 0 ]]; then
    yadm config --add local.class bluetooth
+fi
+
+if [[ $(lspci | grep NVIDIA | wc -l) > 0 ]]; then
+  yadm config --add local.class gpu-nvidia
 fi
 
 

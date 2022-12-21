@@ -1,6 +1,6 @@
 #!/bin/sh
 
-{% if yadm.class == gpu-nvidia %}
+{% if yadm.class == "gpu-nvidia" %}
 label=" CPU"
 {% else %}
 label=""
@@ -16,7 +16,7 @@ else
 	ptemp=$(echo ${label} "$temp"°C)
 fi
 
-{% if yadm.class == gpu-nvidia %}
+{% if yadm.class == "gpu-nvidia" %}
 temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
 
 if [ 1 -eq "$(echo "$temp > 85" | bc)" ]; then
